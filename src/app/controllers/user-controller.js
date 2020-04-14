@@ -66,8 +66,6 @@ exports.delete = async (req, res) => {
   try {
     const id = req.params.userId;
 
-    console.log(id);
-
     await userRepository.delete(id);
 
     res.status(200).send({
