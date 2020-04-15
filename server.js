@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 
 const PORT = process.env.port || 3000;
 
+const indexRoutes = require("./src/app/routes/index-routes");
 const userRoutes = require("./src/app/routes/user-routes");
 
 mongoose.connect(
@@ -17,6 +18,7 @@ mongoose.connect(
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use("/api", indexRoutes);
 app.use("/api/users", userRoutes);
 
 app.listen(PORT, () => {
