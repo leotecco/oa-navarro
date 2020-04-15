@@ -10,6 +10,29 @@ exports.post = async (req, res) => {
   }
 };
 
+exports.login = async (req, res) => {
+  try {
+    const autheticated = await userRepository.login(req.body);
+
+    if (autheticated) {
+      res.status(200).json({
+        message: "Login realizado com sucesso!",
+        autheticated,
+      });
+
+      return;
+    }
+
+    res.status(401).json({
+      message: "Email e/ou senha inválidos!",
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({ message: "Erro ao realizar login!", error });
+  }
+};
+
 exports.getAll = async (req, res) => {
   try {
     const users = await userRepository.get();

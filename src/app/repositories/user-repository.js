@@ -6,6 +6,16 @@ exports.post = (data) => {
   return user.save();
 };
 
+exports.login = async (data) => {
+  const user = await User.findOne({ email: data.email });
+
+  if (!user) {
+    return false;
+  }
+
+  return user.comparePassword(data.password);
+};
+
 exports.get = () => {
   return User.find();
 };
